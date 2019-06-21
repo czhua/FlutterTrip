@@ -1,6 +1,6 @@
 # flutter_trip
 
-A new Flutter application.
+仿携程 学习Demo Flutter从入门到进阶实战携程网App
 
 ## Getting Started
 
