@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:flutter_trip/dao/home_dao.dart';
+import 'package:flutter_trip/model/common_model.dart';
+import 'package:flutter_trip/model/home_model.dart';
+import 'package:flutter_trip/widget/local_nav.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
 
@@ -15,6 +19,14 @@ class _HomePageState extends State<HomePage> {
     'http://5b0988e595225.cdn.sohucs.com/images/20171130/cbb3c678464d4694bdd3aac69a855c46.jpeg'
   ];
   double appBarAlpha = 0;
+  List<CommonModel> localNavList = [];
+
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
 
   _onScroll(offset) {
     double alpha = offset / APPBAR_SCROLL_OFFSET;
@@ -29,9 +41,21 @@ class _HomePageState extends State<HomePage> {
     print(appBarAlpha);
   }
 
+  loadData() async {
+    try {
+      HomeModel model = await HomeDao.fetch();
+      setState(() {
+        localNavList = model.localNavList;
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xfff2f2f2),
         body: Stack(
       children: <Widget>[
         MediaQuery.removePadding(
@@ -59,6 +83,12 @@ class _HomePageState extends State<HomePage> {
                       },
                       pagination: SwiperPagination(),
                     ),
+                  ),
+                  Padding(
+                    child:  LocalNav(
+                      localNavList: localNavList,
+                    ),
+                    padding: EdgeInsets.fromLTRB(7, 4, 7, 4),
                   ),
                   Container(
                     height: 800,
