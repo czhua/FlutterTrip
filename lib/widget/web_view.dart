@@ -75,11 +75,11 @@ class _WebViewState extends State<WebView> {
 
   @override
   void dispose() {
-    super.dispose();
     _onUrlChanged.cancel();
     _onStateChanged.cancel();
     _onHttpError.cancel();
     webViewReference.dispose();
+    super.dispose();
   }
 
   @override
@@ -121,35 +121,40 @@ class _WebViewState extends State<WebView> {
         color: backgroundColor,
         height: 30,
       );
-      return Container(
-        child: FractionallySizedBox(
-          widthFactor: 1,
-          child: Stack(
-            children: <Widget>[
-              GestureDetector(
-                child: Container(
-                  margin: EdgeInsets.only(left: 10),
-                  child: Icon(
-                    Icons.close,
-                    color: backButtonColor,
-                    size: 26,
-                  ),
+    }
+    return Container(
+      color: backgroundColor,
+      padding: EdgeInsets.fromLTRB(0, 40, 0, 10),
+      child: FractionallySizedBox(
+        widthFactor: 1,
+        child: Stack(
+          children: <Widget>[
+            GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Container(
+                margin: EdgeInsets.only(left: 10),
+                child: Icon(
+                  Icons.close,
+                  color: backButtonColor,
+                  size: 26,
                 ),
               ),
-              Positioned(
-                left: 0,
-                right: 0,
-                child: Center(
-                  child: Text(
-                    widget.title ?? '',
-                    style: TextStyle(color: backButtonColor, fontSize: 20),
-                  ),
+            ),
+            Positioned(
+              left: 0,
+              right: 0,
+              child: Center(
+                child: Text(
+                  widget.title ?? '',
+                  style: TextStyle(color: backButtonColor, fontSize: 20),
                 ),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
-      );
-    }
+      ),
+    );
   }
 }
