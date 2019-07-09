@@ -61,9 +61,14 @@ class _SearchBarState extends State<SearchBar> {
         children: <Widget>[
           _wrapTap(
               Container(
+                padding: EdgeInsets.fromLTRB(6, 5, 10, 5),
                 child: widget?.hideLeft ?? false
                     ? null
-                    : Icon(Icons.arrow_back_ios),
+                    : Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.grey,
+                        size: 26,
+                      ),
               ),
               widget.leftButtonClick),
           Expanded(
@@ -84,7 +89,44 @@ class _SearchBarState extends State<SearchBar> {
     );
   }
 
-  _genHomeSearch() {}
+  _genHomeSearch() {
+    return Container(
+      child: Row(
+        children: <Widget>[
+          _wrapTap(
+              Container(
+                  padding: EdgeInsets.fromLTRB(6, 5, 10, 5),
+                  child: Row(
+                    children: <Widget>[
+                      Text(
+                        '上海',
+                        style: TextStyle(color: _homeFontColor(), fontSize: 14),
+                      ),
+                      Icon(
+                        Icons.expand_more,
+                        color: _homeFontColor(),
+                        size: 22,
+                      ),
+                    ],
+                  )),
+              widget.leftButtonClick),
+          Expanded(
+            flex: 1,
+            child: _inputBox(),
+          ),
+          _wrapTap(
+              Container(
+                  padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+                  child: Icon(
+                    Icons.comment,
+                    color: _homeFontColor(),
+                    size: 26,
+                  )),
+              widget.rightButtonClick)
+        ],
+      ),
+    );
+  }
 
   _inputBox() {
     Color inputBoxColor;
@@ -185,5 +227,11 @@ class _SearchBarState extends State<SearchBar> {
         }
       },
     );
+  }
+
+  _homeFontColor() {
+    return widget.searchBarType == SearchBarType.homeLight
+        ? Colors.black54
+        : Colors.white;
   }
 }
