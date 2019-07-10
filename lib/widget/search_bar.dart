@@ -226,6 +226,7 @@ class _SearchBarState extends State<SearchBar> {
           callback();
         }
       },
+      child: child,
     );
   }
 
