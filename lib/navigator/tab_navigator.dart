@@ -22,7 +22,9 @@ class _TabNavigatorState extends State<TabNavigator> {
         controller: _controller,
         children: <Widget>[
           HomePage(),
-          SearchPage(),
+          SearchPage(
+            hideLeft: true,
+          ),
           TravelPage(),
           MyPage(),
         ],

@@ -5,6 +5,7 @@ import 'package:flutter_trip/model/common_model.dart';
 import 'package:flutter_trip/model/grid_nav_model.dart';
 import 'package:flutter_trip/model/home_model.dart';
 import 'package:flutter_trip/model/sales_box_model.dart';
+import 'package:flutter_trip/pages/search_page.dart';
 import 'package:flutter_trip/widget/grid_nav.dart';
 import 'package:flutter_trip/widget/loading_container.dart';
 import 'package:flutter_trip/widget/local_nav.dart';
@@ -190,16 +191,21 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         Container(
-          height: appBarAlpha > 0.2 ? 0.5: 0,
+          height: appBarAlpha > 0.2 ? 0.5 : 0,
           decoration: BoxDecoration(
-            boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 0.5)]
-          ),
+              boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 0.5)]),
         )
       ],
     );
   }
 
-  _jumpToSearch() {}
+  _jumpToSearch() {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return SearchPage(
+        hint: SEARCH_BAR_DEFAULT_TEXT,
+      );
+    }));
+  }
 
   _jumpToSpeak() {}
 }
